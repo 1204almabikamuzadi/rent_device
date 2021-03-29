@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('phone');
+            $table->string('phone')->default('0471789852');
             $table->boolean('active')->default(true);
-            $table->integer('age');
+            $table->integer('age')->nullable();
             $table->string('role')->default('member');
         });
     }
