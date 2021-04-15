@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useContext} from 'react';
 import { FaHome, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,114 +11,70 @@ import User from './helpers/User';
 import {BrowserRouter as Router,Link} from 'react-router-dom';
 import axios from 'axios';
 import Api from './helpers/Api';
+import '../components/navbar/nav.css';
 import {userContext} from './Context';
+import { useHistory } from 'react-router-dom';
 
 
 
 
 
 
-class Navbar extends React.Component{
-  constructor(props){
-
-    super(props);
-    this.handleLogout=this.handleLogout.bind(this);
-    this.state={
-      user:""
-    }
-    
-  }
+function NavBar(props) {
   
-  componentDidMount(){
-    let res=this.context
-    console.log(res);
-  }
+  const {user,logout}=useContext(userContext);
+  let history=useHistory();
   
-  handleLogout(){
-    
+  const handleLogout=()=>{
     Api().post('/logout').then(res=>{
       localStorage.removeItem("token");
-
-    });
-   
-    
+      console.log(res.data)
+      logout()
+      history.push("/login")
+    }
+     
+      ) 
   }
-  render(){
-    return(
-    <div>
-      
 
-    {/* <nav className="navbar navbar-expand-lg navbar-light bg-light ">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#"></a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
+  return (
+      <div>
     
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/"><FaHome />Home</a>
-              <Link to='/'>home2</Link>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/about">Features</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/users">Users</a>  
-            </li>
-            <li className="nav-item">
-              <a className="nav-link " href="/contact"  aria-disabled="false">Contacts</a>
-              <Link to='/contact'>contact2</Link>
-            </li>
-          </ul>
-         
-         
-    
-        </div>
-        <div className="collapse navbar-collapse justify-content-end">
-        <a href="/login">
-          <Button variant="contained" color="primary">
-           <FaSignInAlt/>
-            login
-          </Button></a>
-          <a href="/signup">
-        <Button variant="contained" color="primary">
-          < FaUserPlus/>
-            Signup
-          </Button></a>
-          <a href="#">
-          <Button  onClick={this.handleLogout} variant="contained" color="primary">
-            Logout
-          </Button></a>
-    
-        </div>
+
+  <nav className="navbar navbar-expand-lg navbar-light bg-light ">
+    <div className="container-fluid">
+      <a className="navbar-brand" href="#"></a>
+      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+  
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <Link to="/" className="link"><FaHome />HOME</Link>
+        <Link to="/about" className="link">ABOUT</Link>
+        <Link to="/contact" className="link">CONTACT</Link>
+       
       </div>
-    
-    </nav> */}
-    <div >
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton edge="start" color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" >
-                News
-              </Typography>
-              <Button color="inherit">Login</Button>
-              <Link  to="/">Home</Link>
-              <Link     to="/contact">Contact</Link>
-              <Link to="/login">Login</Link>
-              <Link to={this.handleLogout}>Logout</Link>
-            </Toolbar>
-          </AppBar>
-        </div>
-    
+      <div className="collapse navbar-collapse justify-content-end">
+     {user? <Button  variant="contained" color="primary" onClick={handleLogout}>
+        LOGOUT
+        </Button>:<div><Button variant="contained" color="primary">
+        < FaUserPlus/>
+        <Link to="/signup" className="link">SIGNUP</Link>
+        </Button>
+        <Button variant="contained" color="primary">
+         <FaSignInAlt/>
+         <Link to="/login" className="link">LOGIN</Link>
+        </Button>
+        
+       </div>}
+         
+      </div>
     </div>
-    );
-    
-  }
-    
-
+  
+  </nav>
+  
+  
+  </div>
+  );
 }
-export default Navbar;
+
+export default NavBar;

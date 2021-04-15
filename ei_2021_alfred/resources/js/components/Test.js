@@ -10,7 +10,7 @@ function Test(props) {
 
     return (
         <div>
-          <h1>{user.name?user.name:"epanza makita"}</h1> 
+          <h1>{user?user.name:"epanza makita"}</h1> 
           <button onClick={logout} >deco</button> 
           <button onClick={logUser} >connect</button> 
         </div>

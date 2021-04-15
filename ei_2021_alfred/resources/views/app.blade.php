@@ -9,7 +9,7 @@ rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbD
 crossorigin="anonymous">
 <! — csrf token →
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Your Website Title</title>
+<title>Rent_Device</title>
 <! — styles →
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>

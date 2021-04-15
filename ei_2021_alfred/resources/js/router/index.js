@@ -1,18 +1,21 @@
-import React,{Component, useState} from 'react';
+import React,{Component, useState,useContext} from 'react';
 import { Switch, BrowserRouter, Route ,Link,useHistory,useLocation,Redirect} from 'react-router-dom';
-import Home from '../../views/Home';
+import Home from '../components/home/Home';
 import About from '../../views/About';
 import Contact from '../../views/Contact';
-import Login from '../components/login/Login';
+import LoginPage from '../components/login/LoginPage';
 import Signup from '../components/signup/Signup';
 import UserProfile from '../components/profile/UserProfile'
 import ProtectedRoute from './ProtectedRoute';
 import Test from '../components/profile/Test';
 
 import NavRoute from './NavRouter';
+import {userContext} from '../components/Context'
 
 
 function Router(props) {
+    
+   // const {user,logout,logUser,isAuth}=useContext(userContext);
     const [isAuth,setIsAuth]=useState(true);
    
     return (
@@ -23,10 +26,10 @@ function Router(props) {
                     <Switch>
                         <NavRoute exact path="/" component={Home} />
                         <NavRoute path="/contact" component={About} />
-                        <NavRoute path="/login" component={Login} />
+                        <NavRoute path="/login" component={LoginPage} />
                         <NavRoute path="/signup" component={Signup} />
                         <ProtectedRoute path='/profile' component={UserProfile} isAuth={isAuth}/>
-                        <ProtectedRoute path='/test' component={Test}  isAuth={isAuth} />
+                       
                     </Switch>
                 </div>
             </BrowserRouter>

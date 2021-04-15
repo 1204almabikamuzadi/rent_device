@@ -9,12 +9,12 @@ function Home(props) {
     return (
         <div className="container">
             
-            Home
-            <Button variant="contained" color="primary">
-             Hello World
-            </Button>
-            <h1><FaAmazon color="purple" size="10rem"/></h1>
-            <h1><MdAccessAlarm  color="red" size="10rem"/></h1>
+                Home
+                <Button variant="contained" color="primary">
+                Hello World
+                </Button>
+                <h1><FaAmazon color="purple" size="10rem"/></h1>
+                <h1><MdAccessAlarm  color="red" size="10rem"/></h1>
             <Test/>
 
         </div>

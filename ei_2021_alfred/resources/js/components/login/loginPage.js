@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 function LoginPage(props) {
     const  [details,setdetails]=useState({email:"",password:"",device_name:"browser",errors:[]});
-    const {user,logout,logUser}=useContext(userContext);
+    const {user,logout,logUser,isAuth}=useContext(userContext);
     let history=useHistory();
  const handleLogin=(e)=>{
        e.preventDefault();
@@ -15,7 +15,7 @@ function LoginPage(props) {
         console.log(user);
         localStorage.setItem("token",res.data);
         logUser();
-        console.log(user);
+        console.log(isAuth);
         history.push('/profile');
     }
 ).catch(error=>{
@@ -29,11 +29,17 @@ function LoginPage(props) {
         setdetails({...details,[name]:e.target.value})
 
     }
+    const styles={
+        backgroundColor:"DodgerBlue"
+    }
     return (
         <div>
           <ErrorBoundary>
                 <div className="container">
-                    <div className="home col-5 mx-auto py-2 mt-5">
+                    <div className="row">
+                    <div  style={styles} className="col-md-5"></div>
+
+                    <div className="home col-md-7 mx-auto py-2 mt-5">
                     <h1 className="text-center"> Login</h1>
                     {/* <div className="col align-self-start"></div> */}
 
@@ -57,13 +63,14 @@ function LoginPage(props) {
                         
 
                     </form>
-                    <button onClick={logUser} className="btn btn-primary btn-block form-control">Test</button>
+                    
 
                     </div>
                     </div>
                     {/* <div className="col align-self-end"></div> */}
-                    {JSON.stringify(details)}
+                    {JSON.stringify(user)}
                     </div>
+                </div>
                 </div>
                 </ErrorBoundary>  
         </div>

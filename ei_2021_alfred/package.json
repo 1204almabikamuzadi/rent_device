@@ -30,6 +30,7 @@
         "@material-ui/icons": "^4.11.2",
         "@mdi/font": "^5.9.55",
         "react-icons": "^4.2.0",
-        "react-router-dom": "^5.2.0"
+        "react-router-dom": "^5.2.0",
+        "styled-components": "^5.2.3"
     }
 }
