@@ -37,7 +37,7 @@ function NavBar(props) {
   }
 
   return (
-      <div>
+      <div className="container-fluid">
     
 
   <nav className="navbar navbar-expand-lg navbar-light bg-light ">

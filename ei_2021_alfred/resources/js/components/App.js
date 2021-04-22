@@ -17,6 +17,9 @@ class App extends React.Component {
         this.logout = this.logout.bind(this);
         this.logUser = this.logUser.bind(this);
     }
+    componentDidMount(){
+        this.logUser();
+    }
     logout() {
         this.setState({user: null,isAuth:false});
         console.log("logout ok")
@@ -25,8 +28,11 @@ class App extends React.Component {
        await  Api().get("/user").then(res=>
                  {console.log(res.data);
             this.setState({user:res.data,isAuth:true})
+                 }).catch(error=>{
+                     console.log(error.data)
+                     console.log("aza te ndoki wana")
                  });
-                console.log("eko esimbi te")
+               
             }
        
         

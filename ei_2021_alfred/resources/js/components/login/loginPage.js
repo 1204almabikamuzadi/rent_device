@@ -37,7 +37,7 @@ function LoginPage(props) {
           <ErrorBoundary>
                 <div className="container">
                     <div className="row">
-                    <div  style={styles} className="col-md-5"></div>
+                    
 
                     <div className="home col-md-7 mx-auto py-2 mt-5">
                     <h1 className="text-center"> Login</h1>

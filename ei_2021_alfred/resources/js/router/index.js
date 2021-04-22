@@ -22,7 +22,7 @@ function Router(props) {
         <div>
             <BrowserRouter>
                
-                <div className="py-4">
+                <div className="container-fluid" >
                     <Switch>
                         <NavRoute exact path="/" component={Home} />
                         <NavRoute path="/contact" component={About} />
