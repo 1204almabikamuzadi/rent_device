@@ -43,7 +43,8 @@ class Signup extends Component{
         render(){
             return(
                 <div className="container">
-                    <h1>Signup</h1>
+                    <div className="home col-md-7 mx-auto py-2 mt-5">
+                    <h1 className="text-center">Signup</h1>
                     <form onSubmit={this.handleRegister} >
                         <div className="form-group">
                             <label htmlFor="name" >Name</label>
@@ -70,7 +71,8 @@ class Signup extends Component{
                         </div>
 
                     </form>
-                    {JSON.stringify(this.state)}
+                   
+                    </div>  
                 </div>
             );
         }

@@ -9,7 +9,7 @@ function Home(props) {
     return (
         <div>
             <Body/>
-            <Footer/>
+            
             
         </div>
     );

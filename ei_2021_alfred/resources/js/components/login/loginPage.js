@@ -36,7 +36,7 @@ function LoginPage(props) {
         <div>
           <ErrorBoundary>
                 <div className="container">
-                    <div className="row">
+                    
                     
 
                     <div className="home col-md-7 mx-auto py-2 mt-5">
@@ -70,7 +70,7 @@ function LoginPage(props) {
                     {/* <div className="col align-self-end"></div> */}
                     {JSON.stringify(user)}
                     </div>
-                </div>
+                
                 </div>
                 </ErrorBoundary>  
         </div>
