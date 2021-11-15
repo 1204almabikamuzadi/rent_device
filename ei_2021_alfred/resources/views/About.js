@@ -15,6 +15,7 @@ function About()  {
             
             <div className="container">
                 <h1>about ya beto moshi</h1>
+                <h2>toto</h2>
                 
                 
             </div>
