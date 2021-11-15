@@ -16,6 +16,8 @@ class CreateDevicesTable extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string('model');
+            $table->string('image');
+            $table->string('price');
             $table->string('color');
             $table->boolean('isRentable');
              $table->bigInteger('category_id')->unsigned();

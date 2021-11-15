@@ -13,7 +13,7 @@ function UserProfile(props) {
                 <div className="card-body">
                     <h5 className="card-title">Welcome</h5>
                     <p className="card-text">{user?user.name:"you don't exist"}</p>
-                    <h2>{isAuth}</h2>   
+                    <h2>{isAuth?"true":"not connected"}</h2>   
                </div>
             </div>
             </ErrorBoundary> 
