@@ -1,3 +1,4 @@
+
 import React,{useState,useContext} from 'react';
 import { FaHome, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import { makeStyles } from '@material-ui/core/styles';
@@ -46,7 +47,8 @@ function NavBar(props) {
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
   
-      </button>
+      </
+      button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <Link to="/" className="link"><FaHome />HOME</Link>
         <Link to="/about" className="link">ABOUT</Link>
@@ -54,9 +56,13 @@ function NavBar(props) {
        
       </div>
       <div className="collapse navbar-collapse justify-content-end">
-     {user? <Button  variant="contained" color="primary" onClick={handleLogout}>
-        LOGOUT
-        </Button>:<div><Button variant="contained" color="primary">
+     {user? <div>
+      <Button  variant="contained" color="primary" onClick={handleLogout}>
+        LOGOUT1
+        </Button>
+      
+        
+        </div>:<div><Button variant="contained" color="primary">
         < FaUserPlus/>
         <Link to="/signup" className="link">SIGNUP</Link>
         </Button>

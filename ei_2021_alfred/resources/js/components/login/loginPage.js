@@ -10,7 +10,6 @@ function LoginPage(props) {
     let history=useHistory();
  const handleLogin=(e)=>{
        e.preventDefault();
-       console.log(details);
        Api().post('/login',details).then( res=>{
         console.log(user);
         localStorage.setItem("token",res.data);
