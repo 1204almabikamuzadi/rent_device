@@ -1,0 +1,11 @@
+ Quelques règles pour lancer le projet
+
+ =>php artisan db:create
+ =>php artisan migrate
+ =>php artisan db:seed --class=DatabaseSeeder
+ Problemes rencontrés
+ *le refresh URL renvoit la page 404
+ Route::get('/backend/{path?}', function () {
+        return view('dashboard');
+    })->where('path', '.*');
+    
