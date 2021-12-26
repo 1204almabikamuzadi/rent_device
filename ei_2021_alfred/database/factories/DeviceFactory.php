@@ -22,9 +22,9 @@ class DeviceFactory extends Factory
     public function definition()
     {
         return [
-            'model'=>$this->faker->sentence(6),
-            'color'=>$this->faker->colorName,
-            'isRentable'=>$this->faker->boolean()
+            'description'=>$this->faker->sentence(6),
+            'isRentable'=>$this->faker->boolean(true),
+            "price"=>$this->faker->numberBetween($min = 150, $max = 600)
 
         ];
     }

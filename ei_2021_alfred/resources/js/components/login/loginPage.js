@@ -28,6 +28,7 @@ function LoginPage(props) {
         setdetails({...details,[name]:e.target.value})
 
     }
+   
     const styles={
         backgroundColor:"DodgerBlue"
     }

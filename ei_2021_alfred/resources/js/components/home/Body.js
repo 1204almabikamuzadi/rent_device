@@ -42,7 +42,7 @@ function Body(props) {
          <div className="row">
          <div className="col-sm-1"></div>
           <div className="col-sm-10">
-         <div id=" carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+         <div id=" carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
              
              <div className="carousel-inner">
                  <div className="carousel-item active">

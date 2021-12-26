@@ -1,28 +1,68 @@
-import React from 'react';
-import { BrowserRouter, useHistory } from 'react-router-dom';
-import {BrowserRouter as Router,Link} from 'react-router-dom';
-import ErrorBoundary from '../js/components/ErrorBoundary';
 
-
-
-function About()  {
-    const history=useHistory();
-    const handleClick=()=>{
-        history.push("/contact");
+const product_card=[
+    {
+        id:1,
+        product_name:"rayes_alpha",
+        description:"handsfree hads on music experience",
+        price:350,
+        currency:"$",
+        thumb:"../../images/lap3.jpg"
+    },
+    {
+        id:2,
+        product_name:"rayes_beta",
+        description:"handsfree hads on music experience",
+        price:150,
+        currency:"$",
+        thumb:"../../images/lap3.jpg"
+    },
+    {
+        id:3,
+        product_name:"gamma_alpha",
+        description:"handsfree hads on music experience",
+        price:3200,
+        currency:"$",
+        thumb:"../../images/lap3.JPG"
+    },
+    {
+        id:4,
+        product_name:"tetra_alpha",
+        description:"handsfree hads on music experience",
+        price:388,
+        currency:"$",
+        thumb:"../../images/lap3.jpg"
+    },
+    {
+        id:5,
+        product_name:"rayes_alpha",
+        description:"handsfree hads on music experience",
+        price:350,
+        currency:"$",
+        thumb:"../../images/lap3.jpg"
+    },
+    {
+        id:6,
+        product_name:"rayes_beta",
+        description:"handsfree hads on music experience",
+        price:150,
+        currency:"$",
+        thumb:"../../images/lap3.jpg"
+    },
+    {
+        id:7,
+        product_name:"gamma_alpha",
+        description:"handsfree hads on music experience",
+        price:3200,
+        currency:"$",
+        thumb:"../../images/lap3.JPG"
+    },
+    {
+        id:8,
+        product_name:"tetra_alpha",
+        description:"handsfree hads on music experience",
+        price:388,
+        currency:"$",
+        thumb:"../../images/lap3.jpg"
     }
-    
-        return (
-            
-            <div className="container">
-                <h1>about ya beto moshi</h1>
-                <h2>toto</h2>
-                
-                
-            </div>
-            
-    );
-    
-  
-}
-
-export default About;
+]
+export default product_card;

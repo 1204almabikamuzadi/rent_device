@@ -1,6 +1,7 @@
 
 import React,{useState,useContext} from 'react';
-import { FaHome, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
+import { FaHome, FaSignInAlt, FaUserPlus,FaCartArrowDown } from 'react-icons/fa';
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -36,6 +37,10 @@ function NavBar(props) {
      
       ) 
   }
+  const handleCart=(e)=>{
+    e.preventDefault()
+    history.push("/cart")
+  }
 
   return (
       <div className="container-fluid">
@@ -58,8 +63,10 @@ function NavBar(props) {
       <div className="collapse navbar-collapse justify-content-end">
      {user? <div>
       <Button  variant="contained" color="primary" onClick={handleLogout}>
-        LOGOUT1
+        LOGOUT
         </Button>
+        <Button onClick={handleCart} ><FaCartArrowDown/></Button>
+        
       
         
         </div>:<div><Button variant="contained" color="primary">

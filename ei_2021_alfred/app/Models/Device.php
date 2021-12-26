@@ -14,9 +14,9 @@ class Device extends Model
      * @var array
      */
     protected $fillable = [
-        'model',
-        'color',
-        'isRentable'
+        'description',
+        'category_id'
+        
 
 
     ];

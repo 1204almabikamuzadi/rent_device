@@ -22,4 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register','RegisterController@register');
 Route::post('/login','LoginController@login');
 Route::post('/logout','LoginController@logout')->middleware("auth:sanctum");
+Route::apiResource("device","DeviceController");
+Route::apiResource("category","CategoryController");
+Route::apiResource("basket","BasketController");
 
