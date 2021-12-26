@@ -6,6 +6,7 @@ import Pict from '../helpers/Pict';
 
 
 function CartItem() {
+    var totalPrice=0
     const [cart, setcart] = useState([])
     const [loading, setloading] = useState(true)
 
@@ -37,12 +38,13 @@ function CartItem() {
                         <th>device</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Total</th>
+                        <th>subTotal</th>
                         <th>Remove</th> 
                         </tr>    
                     </thead>
                     <tbody>
                         {cart.map((item,i)=>{
+                            totalPrice+=item.device.price*item.quantity
                             return(
                                 <tr key={item.id}>
                                 <td><Pict src={"http://127.0.0.1:8000/"+item.device.image_path}></Pict></td> 
@@ -50,8 +52,9 @@ function CartItem() {
                                 <td>{item.device_id}</td>
                                 <td>{item.device.price}</td>
                                 <td>{item.quantity}</td>
-                                <td>Total</td>
+                                <td>{item.device.price*item.quantity}</td>
                                 <td>Remove</td>
+                                
 
                            </tr>
                             )
@@ -62,6 +65,10 @@ function CartItem() {
                         }
 
                     </tbody>
+                    <tfoot >
+                        <td>Total</td>
+                        <td>{totalPrice}</td>
+                    </tfoot>
 
                 </table>
                 
