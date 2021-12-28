@@ -136,6 +136,27 @@ class BasketController extends Controller
      */
     public function destroy(Basket $basket)
     {
-        //
+        
+        if(auth("sanctum")->check()){
+            $user_id=auth("sanctum")->user()->id;
+            if($user_id===$basket->user_id){
+                $basket->delete();
+            }
+            
+            return response()->json([
+                "status"=>200,
+                "message"=>"The basket removed succesfully"
+              ]);
+
+        }
+        else{
+            return response()->json([
+                "status"=>409,
+                "message"=>"login to add to cart"
+              ]);
+
+        }
+    
+        
     }
 }

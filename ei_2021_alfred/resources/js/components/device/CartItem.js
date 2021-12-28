@@ -19,6 +19,18 @@ function CartItem() {
 
        ).catch();
     }, [])
+const removeItem=(e,basket_id)=>{
+e.preventDefault()
+const clicked=e.currentTarget
+clicked.innerText="Removing"
+Api().delete('/basket/'+basket_id).then(res=>{
+    console.log("basket deleted")
+    clicked.closest("tr").remove()
+}
+    
+).catch()
+
+}
     if(loading){
         return (
             <div className="spinner-border text-primary" role="status">
@@ -53,12 +65,9 @@ function CartItem() {
                                 <td>{item.device.price}</td>
                                 <td>{item.quantity}</td>
                                 <td>{item.device.price*item.quantity}</td>
-                                <td>Remove</td>
-                                
-
+                                <td><button className="btn" onClick={(e)=>removeItem(e,item.id)}>Remove</button></td>
                            </tr>
                             )
-                            
                             
                         })
 
@@ -66,8 +75,10 @@ function CartItem() {
 
                     </tbody>
                     <tfoot >
+                        <tr>
                         <td>Total</td>
                         <td>{totalPrice}</td>
+                        </tr>
                     </tfoot>
 
                 </table>
