@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Api from '../helpers/Api';
 import Pict from '../helpers/Pict';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -9,6 +10,7 @@ function CartItem() {
     var totalPrice=0
     const [cart, setcart] = useState([])
     const [loading, setloading] = useState(true)
+    let history=useHistory()
 
     useEffect(() => {
        Api().get('/basket').then(res=>{
@@ -19,6 +21,16 @@ function CartItem() {
 
        ).catch();
     }, [])
+    const handlePayment=(e)=>{
+        e.preventDefault()
+        Api().get("/payconfirm").then(res=>{
+            history.push("/profile")
+        }
+
+        ).catch()
+      
+    console.log("payment ready")
+        }
 const removeItem=(e,basket_id)=>{
 e.preventDefault()
 const clicked=e.currentTarget
@@ -31,6 +43,8 @@ Api().delete('/basket/'+basket_id).then(res=>{
 ).catch()
 
 }
+
+
     if(loading){
         return (
             <div className="spinner-border text-primary" role="status">
@@ -82,6 +96,7 @@ Api().delete('/basket/'+basket_id).then(res=>{
                     </tfoot>
 
                 </table>
+                <button className="btn btn-primary" onClick={handlePayment}>Payer</button>
                 
                 
             </div>

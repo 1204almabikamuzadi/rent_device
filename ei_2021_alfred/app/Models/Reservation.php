@@ -18,6 +18,7 @@ class Reservation extends Model
         'endDate'
 
     ];
+    public $timestamps = false;
     public function device(){
         $this->hasOne(Device::class);
     }
