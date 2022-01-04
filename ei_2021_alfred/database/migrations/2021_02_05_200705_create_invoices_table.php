@@ -15,10 +15,8 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('reservation_id')->unsigned();
-            $table->date('invoiceDate');
-            $table->foreign('reservation_id')->references('id')
-            ->on('reservations')->onDelete('cascade');
+            $table->integer("amount")->nullable();
+            $table->integer('number');
             $table->timestamps();
         });
     }

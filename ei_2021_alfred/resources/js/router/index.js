@@ -10,7 +10,7 @@ import ProtectedRoute from './ProtectedRoute';
 import DeviceCreate from  "../components/device/DeviceCreate";
 import DeviceItem from "../components/device/DeviceItem";
 import CartItem from "../components/device/CartItem";
-
+import Reservations from "../components/device/Reservations";
 import Test from '../components/profile/Test';
 
 import NavRoute from './NavRouter';
@@ -35,6 +35,8 @@ function Router(props) {
                         <NavRoute path="/create" component={DeviceCreate} />
                         <NavRoute path="/device/:id" component={DeviceItem} />
                         <NavRoute path="/cart" component={CartItem} />
+                        <NavRoute path="/reservations" component={Reservations} />
+
                         <ProtectedRoute path='/profile' component={UserProfile} isAuth={isAuth}/>
                        
                     </Switch>

@@ -47,9 +47,13 @@ function UserProfile(props) {
          e.target.src="http://127.0.0.1:8000/avatar/default.jpg"
         console.log("error")
     }
+    const displayReservations=(e)=>{
+        e.preventDefault()
+        history.push('/reservations')
+    }
     const handleAdd=(e)=>{
         e.preventDefault()
-        
+
 
     }
     const mystyle = {
@@ -80,6 +84,14 @@ function UserProfile(props) {
             ).catch(error=>
                 console.log("une erreur hoops"));
             }
+        const handleMail=(e)=>{
+            e.preventDefault();
+            Api().get("/mail").then(res=>{
+                console.log("successfully").catch(err=>{
+                    console.log(err.data)
+                })
+            })
+        }
             if(loading){
                 return <h4>Loading data...</h4>
             }
@@ -95,6 +107,8 @@ function UserProfile(props) {
                             <p   onClick={handleDevice} className="card-text">{user?user.name:"you don't exist"}</p>
                             <h2>{isAuth?"true":"not connected"}</h2> 
                             <button className="btn btn-lg btn-primary"  onClick={handleCreate}> Create new Device</button>  
+                            <button className="btn btn-lg btn-primary"  onClick={displayReservations}> Your Reservations</button>  
+                            <button className="btn btn-lg btn-primary"  onClick={handleMail}> Mail</button>  
                        </div>
         
                     </div>

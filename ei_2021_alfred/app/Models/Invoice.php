@@ -14,8 +14,12 @@ class Invoice extends Model
      * @var array
      */
     protected $fillable = [
-        'invoiceDate'
+        'amount'
 
 
     ];
+    public function reservations(){
+        return $this->hasMany(Reservation::class);
+    }
+    
 }

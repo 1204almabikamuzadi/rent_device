@@ -18,11 +18,16 @@ class Reservation extends Model
         'endDate'
 
     ];
-    public $timestamps = false;
-    public function device(){
-        $this->hasOne(Device::class);
+    protected $with=['device'];
+    function device(){
+        return $this->belongsTo(Device::class, 'device_id');
     }
+    public $timestamps = false;
+   
     public function user(){
         $this->hasOne(User::class);
+    }
+    public function invoice(){
+        $this->hasOne(Invoice::class);
     }
 }

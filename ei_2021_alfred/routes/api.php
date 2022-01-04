@@ -26,4 +26,7 @@ Route::apiResource("device","DeviceController");
 Route::apiResource("category","CategoryController");
 Route::apiResource("basket","BasketController");
 Route::get("/payconfirm","UserController@confirm");
+Route::get("/myReservations","ReservationController@userReservations");
+Route::get("/mail","TestController@index");
+
 

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class RentalReport extends Model
 {
     use HasFactory;
+    
 }

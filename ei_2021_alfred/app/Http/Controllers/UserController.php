@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Basket;
 use App\Models\Device;
+use App\Models\Invoice;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -91,11 +92,20 @@ class UserController extends Controller
         if(auth("sanctum")->check()){
             $user_id=auth("sanctum")->user()->id;
             $courses=Basket::where('user_id',$user_id)->get();
+
             if(count($courses)>0){
+                $invoice=new Invoice();
+                $invoice->number=strtotime("now");
+                $invoice->save();
+                $amount=0;
+
                 foreach($courses as $course){
                     $device=Device::where("id",$course->device_id)->first();
+                    $price=$device->price;
+                    $amount+=$price*$course->quantity;
                     $reservation= new Reservation();
                     $reservation->user_id=$user_id;
+                    $reservation->invoice_id=$invoice->id;
                     $reservation->device_id=$device->id;
                     $startdate=strtotime("today");
                     $enddate=strtotime("+1month");
@@ -108,6 +118,8 @@ class UserController extends Controller
                     $basket->delete();
 
                 }
+                $invoice->amount=$amount;
+                $invoice->save();
                 return response()->json([
                     "status"=>200,
                     "courses"=>"message reussi"
