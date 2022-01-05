@@ -17,15 +17,16 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->bigInteger('device_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->date('startDate');
+            $table->date('startDate');                                                  
             $table->date('endDate');
+            $table->boolean('ready')->default(true);
             $table->bigInteger('invoice_id')->unsigned();
             $table->foreign('device_id')->references('id')->on('devices')
             ->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('cascade');
-            $table->foreign('invoice_id')->references('id')->on('invoices')
-            ->onDelete('cascade');
+            // $table->foreign('invoice_id')->references('id')->on('invoices')
+            // ->onDelete('cascade');
             //$table->timestamps();
         });
     }

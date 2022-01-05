@@ -15,6 +15,7 @@ import Test from '../components/profile/Test';
 
 import NavRoute from './NavRouter';
 import {userContext} from '../components/Context'
+import ReportedReservations from '../components/admin/ReportedReservations';
 
 
 function Router(props) {
@@ -35,6 +36,7 @@ function Router(props) {
                         <NavRoute path="/create" component={DeviceCreate} />
                         <NavRoute path="/device/:id" component={DeviceItem} />
                         <NavRoute path="/cart" component={CartItem} />
+                        <NavRoute path="/replaceDevice" component={ReportedReservations} />
                         <NavRoute path="/reservations" component={Reservations} />
 
                         <ProtectedRoute path='/profile' component={UserProfile} isAuth={isAuth}/>

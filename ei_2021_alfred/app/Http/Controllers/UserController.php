@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Notifications\Notifiable;
 use App\Models\Basket;
 use App\Models\Device;
 use App\Models\Invoice;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Notifications\InvoicePaid;
 
 class UserController extends Controller
 {
@@ -91,6 +93,8 @@ class UserController extends Controller
     public function confirm(Request $request){
         if(auth("sanctum")->check()){
             $user_id=auth("sanctum")->user()->id;
+            $user=User::where("id",$user_id)->first();
+          
             $courses=Basket::where('user_id',$user_id)->get();
 
             if(count($courses)>0){
@@ -120,6 +124,9 @@ class UserController extends Controller
                 }
                 $invoice->amount=$amount;
                 $invoice->save();
+                $user->notify(new InvoicePaid($invoice));
+
+
                 return response()->json([
                     "status"=>200,
                     "courses"=>"message reussi"

@@ -13,8 +13,17 @@ function Reservations() {
             setloading(false)
         }).catch()
     }, [])
-    const reportItem=(e,device_id)=>{
-  console.log(device_id)
+    const reportItem=(e,reservation_id)=>{   
+    const clicked=e.currentTarget
+    clicked.innerText="Reporting"
+    
+  Api().put('/reservation/'+reservation_id).then(res=>{
+    clicked.className="btn btn-danger"
+    clicked.innerText="Reported"
+    clicked.active=false
+  }).catch(err=>{                           
+    clicked.innerText="Report"
+  })
     }
     if(loading){
         return (
@@ -51,7 +60,7 @@ function Reservations() {
                                 <td>{item.device.description}</td>
                                 <td>{item.endDate}</td>
                                 <td>print bill</td>
-                                <td><button className="btn" onClick={(e)=>reportItem(e,item.id)}>Report</button></td>
+                                <td><button className="btn btn-primary" onClick={(e)=>reportItem(e,item.id)}>Report</button></td>
                            </tr>
                             )
                             
