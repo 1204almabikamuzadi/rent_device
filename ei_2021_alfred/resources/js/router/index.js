@@ -3,7 +3,7 @@ import { Switch, BrowserRouter, Route ,Link,useHistory,useLocation,Redirect} fro
 import Home from '../components/home/Home';
 import About from '../../views/About';
 import Contact from '../../views/Contact';
-import LoginPage from '../components/login/LoginPage';
+import LoginPage from '../components/login/loginPage';
 import Signup from '../components/signup/Signup';
 import UserProfile from '../components/profile/UserProfile'
 import ProtectedRoute from './ProtectedRoute';
@@ -12,7 +12,7 @@ import DeviceItem from "../components/device/DeviceItem";
 import CartItem from "../components/device/CartItem";
 import Reservations from "../components/device/Reservations";
 import Test from '../components/profile/Test';
-
+import ProfileTabs from '../components/profile/ProfileTabs';
 import NavRoute from './NavRouter';
 import {userContext} from '../components/Context'
 import ReportedReservations from '../components/admin/ReportedReservations';
@@ -39,7 +39,7 @@ function Router(props) {
                         <NavRoute path="/replaceDevice" component={ReportedReservations} />
                         <NavRoute path="/reservations" component={Reservations} />
 
-                        <ProtectedRoute path='/profile' component={UserProfile} isAuth={isAuth}/>
+                        <ProtectedRoute path='/profile' component={ProfileTabs} isAuth={isAuth}/>
                        
                     </Switch>
                 </div>

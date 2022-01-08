@@ -47,11 +47,13 @@ class App extends React.Component {
         }
      
     return (
+        <ErrorBoundary>
         <userContext.Provider value={value}>
         <div>   
             <Router/>  
         </div>
         </userContext.Provider>
+        </ErrorBoundary>
     );
   }
 }

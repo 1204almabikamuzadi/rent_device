@@ -10,3 +10,7 @@
     })->where('path', '.*');
     
 trait et heritage
+millabla
+notifications
+queue and jobs
+event listeners

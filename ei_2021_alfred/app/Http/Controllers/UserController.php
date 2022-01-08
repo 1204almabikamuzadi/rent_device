@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BasketProcessedEvent;
 use App\Models\User;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Basket;
@@ -124,7 +125,8 @@ class UserController extends Controller
                 }
                 $invoice->amount=$amount;
                 $invoice->save();
-                $user->notify(new InvoicePaid($invoice));
+               // $user->notify(new InvoicePaid($invoice));
+               event(new BasketProcessedEvent($invoice));
 
 
                 return response()->json([

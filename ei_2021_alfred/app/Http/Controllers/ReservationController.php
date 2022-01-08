@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Device;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Jobs\NotifyBreakDeviceJob;
 use App\Notifications\deviceBroken;
 
 class ReservationController extends Controller
@@ -26,6 +27,7 @@ class ReservationController extends Controller
             $reservation->ready=false; 
             $update=$reservation->save();
             $user->notify(new deviceBroken($device));
+            NotifyBreakDeviceJob::dispatch($user,$device);
             if($update){ 
 
                         return response()->json([

@@ -3,6 +3,8 @@ import axios from 'axios';
 import React,{Component} from 'react';
 import Api from '../helpers/Api';
 import User from '../helpers/User';
+import { withRouter } from 'react-router-dom';
+
 
 
 
@@ -26,9 +28,11 @@ class Signup extends Component{
     }
     handleRegister(e){        
         e.preventDefault();
+        this.setState({errors:[]}
+            )
         Api().post('/register',this.state).then(response=>
         {
-            console.log(response)
+            this.props.history.push('/login'); 
         }).catch(error=>{
             if(error.response.status===422){
             
@@ -74,6 +78,7 @@ class Signup extends Component{
                     </form>
                    
                     </div>  
+                    {JSON.stringify(this.state)}
                 </div>
             );
         }

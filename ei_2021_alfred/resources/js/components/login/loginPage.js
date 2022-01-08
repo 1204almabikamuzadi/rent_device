@@ -5,11 +5,13 @@ import { userContext } from '../Context';
 import { useHistory } from 'react-router-dom';
 
 function LoginPage(props) {
-    const  [details,setdetails]=useState({email:"",password:"",device_name:"browser",errors:[]});
+    const  [details,setdetails]=useState({email:"",password:"",device_name:"browser"});
+    const  [errors, seterrors] = useState([])
     const {user,logout,logUser,isAuth}=useContext(userContext);
     let history=useHistory();
  const handleLogin=(e)=>{
        e.preventDefault();
+       
        Api().post('/login',details).then( res=>{
         console.log(user);
         localStorage.setItem("token",res.data);
@@ -19,7 +21,7 @@ function LoginPage(props) {
     }
 ).catch(error=>{
     if(error.response.status===422){
-        setdetails({errors:error.response.data.errors});
+        seterrors(error.response.data.errors);
     }
 });
     }
@@ -49,12 +51,12 @@ function LoginPage(props) {
                         <div className="form-group">
                             <label htmlFor="email" >Email</label>
                             <input  className="form-control"type="email" id="email" name="email" onChange={handleChange} autoComplete="username" value={props.email}/>
-                            {details.errors.email?<span className='text-danger'>{details.errors.email}</span>:null}
+                            {errors.email?<span className='text-danger'>{errors.email}</span>:null}
                         </div>
                         <div className="form-group">
                             <label htmlFor="pwd" >Password</label>
                             <input className="form-control" name="password" onChange={handleChange} type="password" id="pwd" autoComplete="current-password" value={props.password} />
-                            {details.errors.password?<span className='text-danger'>{details.errors.password}</span>:null}
+                            {errors.password?<span className='text-danger'>{errors.password}</span>:null}
                         </div>
                         <div className="form-group">
                            <button type="submit" className="btn btn-primary btn-block form-control">Connexion</button>
@@ -68,11 +70,12 @@ function LoginPage(props) {
                     </div>
                     </div>
                     {/* <div className="col align-self-end"></div> */}
-                    {JSON.stringify(user)}
+                  
                     </div>
                 
                 </div>
                 </ErrorBoundary>  
+                
         </div>
     );
 }

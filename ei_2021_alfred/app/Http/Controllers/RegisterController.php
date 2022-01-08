@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Notifications\UserRegisteredNotification;
+use Illuminate\Http\Request;
+use App\Jobs\welcomeUserMailJob;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\UserRegisteredNotification;
 
 class RegisterController extends Controller
 {
@@ -23,7 +24,8 @@ class RegisterController extends Controller
             
             
         ]);
-        $user->notify(new UserRegisteredNotification());
+       // $user->notify(new UserRegisteredNotification());
+       welcomeUserMailJob::dispatch($user);
         return($user);
 
     }
