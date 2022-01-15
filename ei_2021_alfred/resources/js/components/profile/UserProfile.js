@@ -41,7 +41,7 @@ function UserProfile(props) {
             setDevices(dev)
             setloading(false)
         }).catch(error => {
-            console.log(error)
+            console.log(error.data)
         })
     }, []);
     const handleDefault = (e) => {

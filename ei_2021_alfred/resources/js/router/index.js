@@ -16,6 +16,9 @@ import ProfileTabs from '../components/profile/ProfileTabs';
 import NavRoute from './NavRouter';
 import {userContext} from '../components/Context'
 import ReportedReservations from '../components/admin/ReportedReservations';
+import MasterLayout from '../../layouts/admin/MasterLayout';
+import NewUser from '../components/admin/NewUser';
+import UpdateUser from '../components/admin/UpdateUser';
 
 
 function Router(props) {
@@ -38,8 +41,10 @@ function Router(props) {
                         <NavRoute path="/cart" component={CartItem} />
                         <NavRoute path="/replaceDevice" component={ReportedReservations} />
                         <NavRoute path="/reservations" component={Reservations} />
-
+                        <NavRoute path="/newuser" component={NewUser} />
+                        <NavRoute path="/updateUser/:id" component={UpdateUser} />
                         <ProtectedRoute path='/profile' component={ProfileTabs} isAuth={isAuth}/>
+                        <ProtectedRoute path='/admin/dashboard' component={MasterLayout} isAuth={isAuth}/>
                        
                     </Switch>
                 </div>

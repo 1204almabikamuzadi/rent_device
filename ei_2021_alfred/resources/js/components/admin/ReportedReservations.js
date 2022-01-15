@@ -9,7 +9,7 @@ function ReportedReservations(props) {
     useEffect(() => {
         Api().get("/brokenReservations").then(res=>{
             setOrders(res.data.reservations)
-            console.log("hello congo")
+            console.log("hello reported")
             setloading(false)
         }).catch()
     }, [])

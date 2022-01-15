@@ -31,5 +31,10 @@ Route::get("/payconfirm","UserController@confirm");
 Route::get("/myReservations","ReservationController@userReservations");
 Route::get("/mail","TestController@index");
 Route::get("/brokenReservations","ReservationController@brokenReservations");
+Route::get("/users","UserController@index")->middleware("isadmin");
+Route::post('/createUser','UserController@create');
+//Route::get('/user/{id}','UserController@show');
+Route::apiResource("user","UserController");
+
 
 

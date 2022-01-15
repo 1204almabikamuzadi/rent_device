@@ -1,12 +1,14 @@
-import React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import ErrorBoundary from '../ErrorBoundary';
+import * as React from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import axios from 'axios';
+import Api from '../helpers/Api';
+import {Link} from 'react-router-dom'
+//import { Link } from '@material-ui/core';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'name', headerName: 'name', width: 130 },
-  { field: 'email', headerName: 'Email', width: 130 },
-  { field: 'role', headerName: 'role', width: 130 },
+  { field: 'firstName', headerName: 'First name', width: 130 },
+  { field: 'lastName', headerName: 'Last name', width: 130 },
   {
     field: 'age',
     headerName: 'Age',
@@ -20,9 +22,7 @@ const columns = [
     sortable: false,
     width: 160,
     valueGetter: (params) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${
-        params.getValue(params.id, 'lastName') || ''
-      }`,
+      `${params.getValue('firstName') || ''} ${params.getValue('lastName') || ''}`,
   },
 ];
 
@@ -38,19 +38,40 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-export default function Users() {
-  return (
-      <ErrorBoundary>
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div>
-    </ErrorBoundary>
-  );
+export default class UsersTab extends React.Component {
+    constructor(props){
+        super(props);
+        this.state={
+            
+            users:rows,
+            columns:columns
+        };
+        this.handleClick=this.handleClick.bind(this);
+    }
+     handleClick(){
+     this.props.history.push('/newuser'); 
+     console.log("i can wake it up")
+     }
+    componentDidMount(){
+      
+      Api().get('/users').then(res=>{
+        console.log("asali yango");
+       // console.log(res.data);
+        
+    }).catch(error=>{
+      console.log("eboyi kokota");
+    });
+       
+    }
+    render(){
+        return (
+            <div style={{ height: 400, width: '100%' }}>
+              <DataGrid rows={this.state.users} columns={this.state.columns} pageSize={5} checkboxSelection />
+              <button  onClick={this.handleClick} className='btn btn-primary btn-lg'> Create new user</button>
+              <Link to='/newuser'>Create</Link>
+              <Link to='/updateUser/18'>Update</Link>
+            </div>
+          ); 
+    }
 }
 

@@ -48,9 +48,9 @@ export default class UsersTab extends React.Component {
     componentDidMount(){
       
       Api().get('/user').then(res=>{
-        console.log("hello 245");
+        console.log(res.data);
     }).catch(error=>{
-      console.log(error.data);
+      console.log("hello people");
     });
        
     }

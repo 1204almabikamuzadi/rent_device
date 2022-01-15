@@ -26,7 +26,7 @@ class ReservationController extends Controller
             $device=Device::where("id",$reservation->device_id)->first();
             $reservation->ready=false; 
             $update=$reservation->save();
-            $user->notify(new deviceBroken($device));
+           // $user->notify(new deviceBroken($device));
             NotifyBreakDeviceJob::dispatch($user,$device);
             if($update){ 
 

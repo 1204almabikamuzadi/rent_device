@@ -25,8 +25,14 @@ class LoginController extends Controller
             ]);
         }
          Auth::user($user);
+         if($user->role==="admin"){
+           return $user->createToken('token', ['server:admin'])->plainTextToken;
+         }
+         else{
+            return $user->createToken($request->device_name)->plainTextToken;
+         }
     
-        return $user->createToken($request->device_name)->plainTextToken;
+        
     }
     public function authenticate(Request $request)
     {
