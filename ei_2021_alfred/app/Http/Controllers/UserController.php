@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BasketProcessedEvent;
 use App\Models\User;
-use Illuminate\Notifications\Notifiable;
 use App\Models\Basket;
 use App\Models\Device;
 use App\Models\Invoice;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Notifications\InvoicePaid;
+use App\Events\BasketProcessedEvent;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
 
 class UserController extends Controller
 {
@@ -31,9 +32,27 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>['required'],
+            'password'=>['required','min:8'],
+            'email'=>['required','email','unique:users'],
+            'password_confirmation'=>['same:password'],
+            'role'=>['required']
+        ]);
+       $user= User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'role'=>$request->role
+            
+            
+        ]);
+        return response()->json([
+            "status"=>201,
+            "user"=>$user
+        ]);
     }
 
     /**
@@ -55,7 +74,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return response()->json(
+            [
+                "status"=>200,
+                "user"=>$user
+            ]
+        );
     }
 
     /**
@@ -66,7 +90,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        
     }
 
     /**
@@ -78,7 +102,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->update($request->all());
+        $user->save();
+        return response()->json([
+            "status"=>200,
+            "user"=>$user
+        ]);
     }
 
     /**
