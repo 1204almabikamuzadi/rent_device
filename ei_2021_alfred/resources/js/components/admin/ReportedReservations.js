@@ -33,7 +33,7 @@ function ReportedReservations(props) {
         
     }
    
-    else if(orders.length>0){
+    else if(orders&&orders.length>0){
         return (
             <div className="table-responsive">
                 <table className="table table-bordered">

@@ -25,8 +25,9 @@ class App extends React.Component {
         console.log("logout ok")
       }
     async logUser(){ 
-       await  Api().get("/user").then(res=>
-                 {console.log(res.data);
+       await  Api().get("/loggeduser").then(res=>
+                 
+                 {
             this.setState({user:res.data,isAuth:true})
                  }).catch(error=>{
                      console.log(error.data)

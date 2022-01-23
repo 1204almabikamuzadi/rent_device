@@ -15,6 +15,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import ReportedReservations from '../admin/ReportedReservations';
+import ReactPaginate from 'react-paginate';
+import Pagination from '../helpers/Pagination';
 
 
 function UserProfile(props) {
@@ -22,23 +24,29 @@ function UserProfile(props) {
 
     const [devices, setDevices] = useState([])
     const [loading, setloading] = useState(true)
+    const [currentPage, setcurrentPage] = useState(0)
+    const [totalPage, settotalPage] = useState()
+    const [totalItemPerPage, settotalItemPerPage] = useState()
+    const [totalItems, settotalItems] = useState()
+
     let history = useHistory();
     const handleCreate = (e) => {
         e.preventDefault();
         history.push('/create');
-
     }
     const handleDetails = (e) => {
         e.preventDefault();
         history.push('/device/' + e.target.value);
     }
     useEffect(() => {
-        const dev = []
         Api().get("/device").then(res => {
-            (res.data).map(x => {
-                dev.push(x)
-            })
-            setDevices(dev)
+            
+            setDevices(res.data.data) 
+            settotalItems(res.data.total)
+            settotalPage(res.data.last_page)
+            settotalItemPerPage(res.data.per_page)
+
+
             setloading(false)
         }).catch(error => {
             console.log(error.data)
@@ -85,6 +93,16 @@ function UserProfile(props) {
         ).catch(error =>
             console.log("une erreur hoops"));
     }
+    const pageClicked=(data)=>{
+        let page=data.selected+1
+        console.log(page)
+        Api().get("/device?page="+page).then(res=>{
+            setDevices(res.data.data)
+            settotalItems(res.data.total)
+            settotalPage(res.data.last_page)
+            settotalItemPerPage(res.data.per_page)
+        }).catch()
+    }
 
     if (loading) {
         return <h4>Loading data...</h4>
@@ -109,6 +127,15 @@ function UserProfile(props) {
 
                     <h2>Product List</h2>
                     <div className="items">{listItems}</div>
+                    <div>
+                  
+                   <Pagination
+                    initialPage={currentPage}
+                    pageRangeDisplayed={5}
+                    pageCount={totalPage}
+                    onPageChange={pageClicked}
+                   />
+                    </div>
 
 
                 </div>

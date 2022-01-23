@@ -1,5 +1,5 @@
 
-import React,{useState,useContext} from 'react';
+import React,{useState,useContext,useLayoutEffect} from 'react';
 import { FaHome, FaSignInAlt, FaUserPlus,FaCartArrowDown } from 'react-icons/fa';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -24,13 +24,14 @@ import { useHistory } from 'react-router-dom';
 
 function NavBar(props) {
   
+  
   const {user,logout}=useContext(userContext);
   let history=useHistory();
+  //const [loggedUser, setloggedUser] = useState(user)
   
   const handleLogout=()=>{
     Api().post('/logout').then(res=>{
       localStorage.removeItem("token");
-      console.log(res.data)
       logout()
       history.push("/login")
     }
@@ -66,9 +67,6 @@ function NavBar(props) {
         LOGOUT
         </Button>
         <Button onClick={handleCart} ><FaCartArrowDown/></Button>
-        
-      
-        
         </div>:<div><Button variant="contained" color="primary">
         < FaUserPlus/>
         <Link to="/signup" className="link">SIGNUP</Link>

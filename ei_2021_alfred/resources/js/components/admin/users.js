@@ -3,6 +3,8 @@ import { DataGrid } from '@material-ui/data-grid';
 import axios from 'axios';
 import Api from '../helpers/Api';
 import {Link} from 'react-router-dom'
+import PopModal from '../helpers/Modal';
+
 //import { Link } from '@material-ui/core';
 
 const columns = [
@@ -47,6 +49,8 @@ export default class UsersTab extends React.Component {
             columns:columns
         };
         this.handleClick=this.handleClick.bind(this);
+        this.handleDelete=this.handleDelete.bind(this);
+
     }
      handleClick(){
      this.props.history.push('/newuser'); 
@@ -63,13 +67,19 @@ export default class UsersTab extends React.Component {
     });
        
     }
+    handleDelete(){
+      s
+    }
     render(){
         return (
             <div style={{ height: 400, width: '100%' }}>
               <DataGrid rows={this.state.users} columns={this.state.columns} pageSize={5} checkboxSelection />
               <button  onClick={this.handleClick} className='btn btn-primary btn-lg'> Create new user</button>
               <Link to='/newuser'>Create</Link>
-              <Link to='/updateUser/18'>Update</Link>
+              <Link to='/updateUser/21'>Update</Link>
+              <Link to={this.handleDelete}>delete</Link>
+              <PopModal/>
+              
             </div>
           ); 
     }

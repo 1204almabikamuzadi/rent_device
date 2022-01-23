@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index()
     {
         
-        $users=User::all();
+        $users=User::paginate(5);
         return $users->toJson();
     }
 
@@ -103,6 +103,10 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($request->all());
+        if($request->password){
+            $user->password=Hash::make($request->password);
+        }
+        
         $user->save();
         return response()->json([
             "status"=>200,
@@ -118,7 +122,36 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if(auth("sanctum")->check()){
+         $connected_id=auth("sanctum")->user()->id;
+         $connected_user=User::find($connected_id);
+        if($connected_id!=$user->id){
+            $user->delete();
+            return response()->json(
+                [
+                    "status"=>200,
+                    "message"=>"this user has been deleted"
+                ]
+            );
+        }
+        else{
+            return response()->json(
+                [
+                    "status"=>409,
+                    "message"=>"you can not delete your self"
+                ]
+            );
+        }
+         
+        }
+        else{
+            return response()->json(
+                [
+                    "status"=>401,
+                    "message"=>"Login as admin to delete user"
+                ]
+            );
+        }
     }
     public function confirm(Request $request){
         if(auth("sanctum")->check()){

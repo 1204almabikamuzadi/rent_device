@@ -16,7 +16,7 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/loggeduser', function (Request $request) {
     return $request->user();
 });
 Route::post('/register','RegisterController@register');
@@ -31,7 +31,7 @@ Route::get("/payconfirm","UserController@confirm");
 Route::get("/myReservations","ReservationController@userReservations");
 Route::get("/mail","TestController@index");
 Route::get("/brokenReservations","ReservationController@brokenReservations");
-Route::get("/users","UserController@index")->middleware("isadmin");
+Route::get("/users","UserController@index");
 Route::post('/createUser','UserController@create');
 //Route::get('/user/{id}','UserController@show');
 Route::apiResource("user","UserController");

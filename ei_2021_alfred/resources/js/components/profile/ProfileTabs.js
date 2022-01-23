@@ -1,6 +1,7 @@
 import React, { useState, useEffect,useContext } from 'react'
 import ReportedReservations from '../admin/ReportedReservations'
 import Users from '../admin/Users'
+import Members from '../admin/Members'
 import UserProfile from '../profile/UserProfile'
 import { userContext } from '../Context';
 
@@ -51,7 +52,7 @@ function ProfileTabs() {
 
       <div className="tab-content">
         <div className={state ==1 ? "tab-pane active" : "tab-pane"} id="home" role="tabpanel" aria-labelledby="home-tab" ><UserProfile /></div>
-         <div className={state ==2 ? "tab-pane active" : "tab-pane"} id="profile" role="tabpanel" aria-labelledby="profile-tab" ><Users /></div>
+         <div className={state ==2 ? "tab-pane active" : "tab-pane"} id="profile" role="tabpanel" aria-labelledby="profile-tab" ><Members /></div>
         <div className={state ==3 ? "tab-pane active" : "tab-pane"} id="messages" role="tabpanel" aria-labelledby="messages-tab"  ><ReportedReservations /></div>
         <div className={state ==4 ? "tab-pane active" : "tab-pane"} id="settings" role="tabpanel" aria-labelledby="settings-tab"  >...</div>
       </div>

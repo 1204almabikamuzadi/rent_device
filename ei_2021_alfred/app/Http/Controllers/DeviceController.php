@@ -16,7 +16,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
-    $devices=Device::all();
+    $devices=Device::paginate(3);
     return $devices->toJson();
         
     }
