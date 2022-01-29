@@ -54,7 +54,7 @@ Api().delete('/basket/'+basket_id).then(res=>{
 
         
     }
-    else{
+    else if(cart&&cart.length>0){
         return (
             <div className="table-responsive">
                 <table className="table table-bordered">
@@ -102,6 +102,20 @@ Api().delete('/basket/'+basket_id).then(res=>{
             </div>
         )
 
+    }
+    else{
+        return(
+            <div className="jumbotron jumbotron-fluid ">
+     
+     <div className="jumbotron jumbotron-fluid danger" >
+  <div className="container">
+    <h1 className="display-4">No data to display</h1>
+    <p className="lead">Please make your choices</p>
+      </div>
+     </div>
+
+            </div>
+        )
     }
     
     

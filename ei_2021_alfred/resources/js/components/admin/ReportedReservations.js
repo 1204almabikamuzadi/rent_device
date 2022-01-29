@@ -9,7 +9,6 @@ function ReportedReservations(props) {
     useEffect(() => {
         Api().get("/brokenReservations").then(res=>{
             setOrders(res.data.reservations)
-            console.log("hello reported")
             setloading(false)
         }).catch()
     }, [])
@@ -54,7 +53,7 @@ function ReportedReservations(props) {
                             return(
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
-                                <td><Pict src={"http://127.0.0.1:8000/"+item.device.image_path}></Pict></td> 
+                                <td><Pict src={"http://127.0.0.1:8000/"+item.device.image_path} className="w-25"></Pict></td> 
                                 <td>{item.device.description}</td>
                                 <td>{item.endDate}</td>
                                 <td>print bill</td>

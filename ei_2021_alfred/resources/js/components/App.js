@@ -30,8 +30,7 @@ class App extends React.Component {
                  {
             this.setState({user:res.data,isAuth:true})
                  }).catch(error=>{
-                     console.log(error.data)
-                     console.log("aza te ndoki wana")
+                    
                  });
                
             }

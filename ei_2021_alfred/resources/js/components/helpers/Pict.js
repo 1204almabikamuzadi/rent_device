@@ -11,7 +11,7 @@ const mystyle = {
 
 function Pict(props) {
     return (
-        <img src={props.src} style={mystyle} onError={handleDefault} alt="" />
+        <img src={props.src} style={props.style} onError={handleDefault} className={props.className} alt="image" />
     )
 }
 

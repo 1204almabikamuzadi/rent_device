@@ -8,7 +8,6 @@ let Api=function(){
     let token=localStorage.getItem("token");
     if(token){
         axios.defaults.headers.common['Authorization']=`Bearer${token}`;
-        console.log(token);
     }
     
     return axios;

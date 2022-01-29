@@ -17,6 +17,7 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import ReportedReservations from '../admin/ReportedReservations';
 import ReactPaginate from 'react-paginate';
 import Pagination from '../helpers/Pagination';
+import Navbar from '../navbar/Navbar';
 
 
 function UserProfile(props) {
@@ -76,10 +77,9 @@ function UserProfile(props) {
                 <img className="card-img-top" src={"http://127.0.0.1:8000/" + item.image_path} onError={handleDefault} alt="Card image cap" />
                 <div className="card-body">
                     <h5 className="card-title">{item.description.substr(0, 25) + "..."}</h5>
-                    <p className="card-text">{item.price}</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                    <button className="btn btn-lg btn-primary" value={item.id} onClick={handleDetails}> show details</button>
-                    <Link to={"/device/" + item.id}>addto cart</Link>
+                    <p className="card-text">{item.price} Euro </p>
+                    <Link to={"/device/" + item.id}>add to cart</Link>
+                    <button className="btn  btn-primary" value={item.id} onClick={handleDetails}> show details</button>
                 </div>
             </div>
         </div>
@@ -95,7 +95,6 @@ function UserProfile(props) {
     }
     const pageClicked=(data)=>{
         let page=data.selected+1
-        console.log(page)
         Api().get("/device?page="+page).then(res=>{
             setDevices(res.data.data)
             settotalItems(res.data.total)
@@ -118,15 +117,15 @@ function UserProfile(props) {
                             <h5 className="card-title">Welcome</h5>
                             <p onClick={handleDevice} className="card-text">{user ? user.name : "you don't exist"}</p>
                             <h2>{isAuth ? "true" : "not connected"}</h2>
-                            <button className="btn btn-lg btn-primary" onClick={handleCreate}> Create new Device</button>
-                            <button className="btn btn-lg btn-primary" onClick={displayReservations}> Your Reservations</button>
-                            <Link to="/replaceDevice">Replace device</Link>
                         </div>
 
                     </div>
 
-                    <h2>Product List</h2>
+                    <h2 className='text-center'>Product List</h2>
+                    <Navbar/>
                     <div className="items">{listItems}</div>
+                    {user&&user.role=="admin"&&<button className="btn btn-lg btn-primary" onClick={handleCreate}> Create new Device</button>}
+
                     <div>
                   
                    <Pagination

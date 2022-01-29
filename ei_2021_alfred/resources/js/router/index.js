@@ -18,6 +18,8 @@ import {userContext} from '../components/Context'
 import ReportedReservations from '../components/admin/ReportedReservations';
 import NewUser from '../components/admin/NewUser';
 import UpdateUser from '../components/admin/UpdateUser';
+import AdminPannel from '../components/admin/AdminPannel';
+import ViewDevice from '../components/device/ViewDevice';
 
 
 function Router(props) {
@@ -36,12 +38,13 @@ function Router(props) {
                         <NavRoute path="/login" component={LoginPage} />
                         <NavRoute path="/signup" component={Signup} />
                         <NavRoute path="/create" component={DeviceCreate} />
-                        <NavRoute path="/device/:id" component={DeviceItem} />
+                        <NavRoute path="/device/:id" component={ViewDevice} />
                         <NavRoute path="/cart" component={CartItem} />
                         <NavRoute path="/replaceDevice" component={ReportedReservations} />
                         <NavRoute path="/reservations" component={Reservations} />
                         <NavRoute path="/newuser" component={NewUser} />
                         <NavRoute path="/updateUser/:id" component={UpdateUser} />
+                        <NavRoute path="/adminpannel" component={AdminPannel} />
                         <ProtectedRoute path='/profile' component={ProfileTabs} isAuth={isAuth}/>
                        
                        

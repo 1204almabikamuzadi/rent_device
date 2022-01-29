@@ -11,6 +11,24 @@ use App\Notifications\deviceBroken;
 
 class ReservationController extends Controller
 {
+
+
+    public function index(){
+        if(auth("sanctum")->check()){
+            $reservations=Reservation::all();
+            
+          return   response()->json([
+                "status"=>"200",
+                "reservations"=>$reservations
+            ]);
+        }
+        else{
+            response()->json([
+                "status"=>"200",
+                "reservations"=>"you are not logged please log in"
+            ]);
+        }
+    }
      /**
      * Update the specified resource in storage.
      *
@@ -55,6 +73,7 @@ class ReservationController extends Controller
         }
        
     }
+    
     public function userReservations(){
         if(auth("sanctum")->check()){
             $user_id=auth("sanctum")->user()->id;

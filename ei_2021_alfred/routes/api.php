@@ -31,10 +31,12 @@ Route::get("/payconfirm","UserController@confirm");
 Route::get("/myReservations","ReservationController@userReservations");
 Route::get("/mail","TestController@index");
 Route::get("/brokenReservations","ReservationController@brokenReservations");
+Route::get("/reservations","ReservationController@index");
+
 Route::get("/users","UserController@index");
 Route::post('/createUser','UserController@create');
 //Route::get('/user/{id}','UserController@show');
-Route::apiResource("user","UserController");
+//Route::apiResource("user","UserController");
 
 
 

@@ -8,23 +8,22 @@ import PopModal from '../helpers/Modal';
 //import { Link } from '@material-ui/core';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
+  { field: 'name', headerName: 'Name', width: 70 },
+  { field: 'email', headerName: 'Email', width: 130 },
+  { field: 'role', headerName: 'Role', width: 130 },
   {
-    field: 'age',
-    headerName: 'Age',
+    field: 'phone',
+    headerName: 'Phone',
     type: 'number',
     width: 90,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
+    field: 'active',
+    headerName: 'Active',
+    
+    sortable: true,
     width: 160,
-    valueGetter: (params) =>
-      `${params.getValue('firstName') || ''} ${params.getValue('lastName') || ''}`,
+  
   },
 ];
 
@@ -44,8 +43,7 @@ export default class UsersTab extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            
-            users:rows,
+            rows:rows,
             columns:columns
         };
         this.handleClick=this.handleClick.bind(this);
@@ -59,26 +57,28 @@ export default class UsersTab extends React.Component {
     componentDidMount(){
       
       Api().get('/users').then(res=>{
-        console.log("asali yango");
-       // console.log(res.data);
+      console.log(data)
+      this.setState({rows:res.data})
         
     }).catch(error=>{
-      console.log("eboyi kokota");
+      console.log("eboyi");
     });
        
     }
     handleDelete(){
-      s
+      
+        console.log("user succefully deleted")
+    
     }
     render(){
         return (
             <div style={{ height: 400, width: '100%' }}>
               <DataGrid rows={this.state.users} columns={this.state.columns} pageSize={5} checkboxSelection />
-              <button  onClick={this.handleClick} className='btn btn-primary btn-lg'> Create new user</button>
-              <Link to='/newuser'>Create</Link>
+              {/* <button  onClick={this.handleClick} className='btn btn-primary btn-lg'> Create new user</button> */}
+              {/* <Link to='/newuser'>Create</Link>
               <Link to='/updateUser/21'>Update</Link>
-              <Link to={this.handleDelete}>delete</Link>
-              <PopModal/>
+              <Link to={this.handleDelete}>delete</Link> */}
+              {/* <PopModal/> */}
               
             </div>
           ); 

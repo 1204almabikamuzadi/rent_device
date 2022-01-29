@@ -8,6 +8,7 @@ import {
     Switch,
     Route,
     Link,
+    useHistory,
     useParams
   } from "react-router-dom";
 
@@ -16,7 +17,7 @@ function DeviceItem(props) {
 
     const[device,setDevice]=useState();
     const [quantity, setquantity] = useState(0)
-
+    const history=useHistory()
     const [loading, setloading] = useState(true)
     useEffect(item=>{
         const div=null
@@ -50,6 +51,7 @@ function DeviceItem(props) {
         Api().post('/basket',data).then(res=>{
             if(res.data.status==201){
             swal("Cart!", "Cart have been created!", "success");
+            
             }
             if(res.data.status==404){
                 swal("Cart!", "device does not exists!", "error");
@@ -63,6 +65,7 @@ function DeviceItem(props) {
             if(res.data.status==200){
                             swal("Cart!", "Basket modified succesfully!", "success");
                             }
+                            history.push("/profile")
         }
             
         ).catch(error=>{

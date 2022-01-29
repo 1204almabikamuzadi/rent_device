@@ -19,6 +19,7 @@ function Members() {
             res=>{
                 console.log("user deleted succesfully")
             }
+
         ).catch()
 
     }
@@ -51,7 +52,7 @@ function Members() {
                             <th>Id</th>
                             <th >Name</th>
                             <th>Email</th>
-                            <th>Age</th>
+                            <th>Role</th>
                             <th>Edit</th>
                             <th>Delete</th> 
                             </tr>    
@@ -65,7 +66,7 @@ function Members() {
                                      <td>{item.id}</td>
                                     <td>{item.name}</td> 
                                     <td>{item.email}</td>
-                                    <td>{item.age}</td>
+                                    <td>{item.role}</td>
                                     <td><Link className='btn btn-success' to={'/updateUser/'+item.id}>Edit</Link></td>
                                     <td><button className='btn btn-danger' onClick={(e)=>handledelete(e,item.id)}>Delete</button></td>
                                </tr>

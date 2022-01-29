@@ -57,12 +57,12 @@ function NavBar(props) {
       button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <Link to="/" className="link"><FaHome />HOME</Link>
-        <Link to="/about" className="link">ABOUT</Link>
-        <Link to="/contact" className="link">CONTACT</Link>
-       
+       {user&&user.role=="admin"&&<Link to="/adminpannel" className="link">ADMIN PANNEL</Link>}
+        
       </div>
       <div className="collapse navbar-collapse justify-content-end">
      {user? <div>
+      <Link to="/profile" className="link">PROFILE</Link>
       <Button  variant="contained" color="primary" onClick={handleLogout}>
         LOGOUT
         </Button>
