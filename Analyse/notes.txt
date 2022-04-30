@@ -18,3 +18,5 @@ useffect
 refresh tabs
 use form
 pagination
+import faker in file
+$faker = \Faker\Factory::create();

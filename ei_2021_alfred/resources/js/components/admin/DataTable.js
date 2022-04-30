@@ -12,7 +12,7 @@ function DataTable() {
     const history=useHistory()
     const editUser=(e)=>{
         e.preventDefault()
-        console.log("coucou"+id)
+        console.log("coucou")
     }
    
     const [rows, setrows] = useState([])
@@ -35,7 +35,7 @@ function DataTable() {
         
         },
         {
-            field: 'actions',
+            field: 'id',
             headerName: 'Action',
 
             sortable: false,
@@ -44,7 +44,7 @@ function DataTable() {
             disableClickEventBubbling:true,
             renderCell:()=>{
                 return(
-                    <Button variant="contained" color="primary" startIcon={<EditIcon />} onClick={()=>editUser()}>
+                    <Button variant="contained" color="primary" startIcon={<EditIcon />} onClick={editUser  }>
                     Edit
                   </Button>
                 )
@@ -63,6 +63,7 @@ function DataTable() {
                     <Button
                       variant="contained"
                       color="secondary"
+                    
                       startIcon={<DeleteIcon />}
                     >
                       Delete

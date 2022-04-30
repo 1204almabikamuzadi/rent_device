@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
@@ -13,6 +14,14 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Category::factory(10)->create();
+        $categories=['Windows_pc','Mac_pc','Phone_Android','Iphone'];
+        $faker = \Faker\Factory::create();
+        foreach ($categories as $cat) {
+            DB::table('categories')->insert([
+            'name'=>$cat,
+            'type'=>$faker->word(6)
+
+            ]);
+        }
     }
 }

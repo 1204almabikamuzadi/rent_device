@@ -47,7 +47,6 @@ function DeviceItem(props) {
             "device_id":device.id,
             "quantity":quantity
         }
-        console.log(device.id)
         Api().post('/basket',data).then(res=>{
             if(res.data.status==201){
             swal("Cart!", "Cart have been created!", "success");

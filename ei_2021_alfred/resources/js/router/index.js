@@ -20,6 +20,7 @@ import NewUser from '../components/admin/NewUser';
 import UpdateUser from '../components/admin/UpdateUser';
 import AdminPannel from '../components/admin/AdminPannel';
 import ViewDevice from '../components/device/ViewDevice';
+import Signin from '../components/login/Signin';
 
 
 function Router(props) {
@@ -45,7 +46,7 @@ function Router(props) {
                         <NavRoute path="/newuser" component={NewUser} />
                         <NavRoute path="/updateUser/:id" component={UpdateUser} />
                         <NavRoute path="/adminpannel" component={AdminPannel} />
-                        <ProtectedRoute path='/profile' component={ProfileTabs} isAuth={isAuth}/>
+                        <NavRoute path='/profile' component={ProfileTabs} />
                        
                        
                     </Switch>

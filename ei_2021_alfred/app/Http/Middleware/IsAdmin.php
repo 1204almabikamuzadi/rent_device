@@ -21,6 +21,7 @@ class IsAdmin
         if(auth("sanctum")->check()){
             $user_id=auth("sanctum")->user()->id;
             $user=User::Find($user_id);
+            
             if($user->tokenCan('server:admin')){
                 return $next($request);
             }
@@ -39,7 +40,7 @@ class IsAdmin
             return response()->json(
                 [
                     "status"=>401,
-                    "message"=>"you are logged in pleas log in"
+                    "message"=>"you are not logged in please log in"
                 ]
             );
         }

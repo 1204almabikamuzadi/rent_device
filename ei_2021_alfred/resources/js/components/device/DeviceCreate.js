@@ -9,7 +9,7 @@ import Select from 'react-select';
 function DeviceCreate(props) {
     const fd=new FormData()
     const [details,setDetails]=useState({
-        description:"",price:""
+        description:"",price:"",name:""
     });
     const [selectedFile,setSelectedFile]=useState(null);
     let history=useHistory();
@@ -48,6 +48,7 @@ function DeviceCreate(props) {
         e.preventDefault();
         fd.append("myfile",selectedFile,selectedFile.name)
         fd.append("category",category)
+        fd.append("name",details.name)
         fd.append("description",details.description)
         fd.append("price",details.price)
         Api().post("/device",fd).then(res=>{
@@ -72,6 +73,11 @@ function DeviceCreate(props) {
                  <h1>Create Device</h1>
                 
                 <form>
+                <div className="form-group">
+                    <label htmlFor="name"> Price</label>
+                    <input  className="form-control"type="text" id="name" name="name" onChange={handleChange} autoComplete="name" value={props.props}/>
+                        
+                    </div>
                     <div className="form-group" onSubmit={handleSubmit}>
                         <label htmlFor="descriptin"> Description</label>
                         <textarea  className="form-control" name="description" id="description" cols="30" rows="5" onChange={handleChange} autoComplete="model" value={props.model} ></textarea>

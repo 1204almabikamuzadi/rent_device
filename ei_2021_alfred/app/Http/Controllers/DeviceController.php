@@ -16,7 +16,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
-    $devices=Device::paginate(3);
+    $devices=Device::paginate(8);
     return $devices->toJson();
         
     }
@@ -94,5 +94,12 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         $device->delete();
+    }
+    public function search($key){
+        $devices= Device::where('name','LIKE',"%$key%")
+        ->orWhere('description','LIKE',"%$key%")->paginate(8);
+        return $devices->toJson();
+         
+        
     }
 }

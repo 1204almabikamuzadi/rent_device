@@ -12,13 +12,16 @@ class App extends React.Component {
         super(props);
         this.state={
             user:null,
-            isAuth:false
+            isAuth:false,
+            itemInBasket:null
         }
         this.logout = this.logout.bind(this);
         this.logUser = this.logUser.bind(this);
+        this.getItem= this.getItem.bind(this);
     }
     componentDidMount(){
         this.logUser();
+        this.getItem();
     }
     logout() {
         this.setState({user: null,isAuth:false});
@@ -26,14 +29,25 @@ class App extends React.Component {
       }
     async logUser(){ 
        await  Api().get("/loggeduser").then(res=>
-                 
                  {
             this.setState({user:res.data,isAuth:true})
+            
                  }).catch(error=>{
                     
                  });
                
             }
+            
+      async getItem(){ 
+                await  Api().get("/basket").then(res=>
+                          {
+                     this.setState({itemInBasket:res.data.basket.length})
+                     
+                          }).catch(error=>{
+                             
+                          });
+                        
+                     }
        
         
             
@@ -42,8 +56,12 @@ class App extends React.Component {
         const value={
             user:this.state.user,
             isAuth:this.state.isAuth,
+            itemInBasket:this.state.itemInBasket,
             logout:this.logout,
-            logUser:this.logUser
+            logUser:this.logUser,
+            getItem:this.getItem
+
+
         }
      
     return (

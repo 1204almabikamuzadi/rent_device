@@ -1,6 +1,6 @@
 
-import React,{useState,useEffect} from 'react'
-
+import React,{useState,useEffect,useContext} from 'react'
+import {userContext} from '../Context';
 import Pict from '../helpers/Pict'
 import Api from '../helpers/Api';
 import swal from 'sweetalert';
@@ -16,7 +16,7 @@ import {
 
 function ViewDevice(props) {
     let {id}=useParams();
-
+    const {user,itemInBasket,getItem,logout}=useContext(userContext);
     const[device,setDevice]=useState();
     const [quantity, setquantity] = useState(0)
     const history=useHistory()
@@ -68,7 +68,9 @@ function ViewDevice(props) {
                             swal("Cart!", "Basket modified succesfully!", "success");
                             }
                             history.push("/profile")
+            getItem();
         }
+    
             
         ).catch(error=>{
             console.log(error)

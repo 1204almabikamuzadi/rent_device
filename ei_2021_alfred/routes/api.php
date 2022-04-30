@@ -32,9 +32,13 @@ Route::get("/myReservations","ReservationController@userReservations");
 Route::get("/mail","TestController@index");
 Route::get("/brokenReservations","ReservationController@brokenReservations");
 Route::get("/reservations","ReservationController@index");
-
+Route::get("device/search/{key}","DeviceController@search");
 Route::get("/users","UserController@index");
 Route::post('/createUser','UserController@create');
+Route::post("reservation/return/{id}","ReservationController@return");
+Route::get("/users","UserController@index");
+Route::post("/user/disable/{id}","UserController@disable");
+
 //Route::get('/user/{id}','UserController@show');
 //Route::apiResource("user","UserController");
 

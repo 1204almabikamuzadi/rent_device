@@ -1,5 +1,5 @@
 
-import React,{useState,useContext,useLayoutEffect} from 'react';
+import React,{useState,useContext,useLayoutEffect, useEffect} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,13 +16,14 @@ import Button from '@mui/material/Button';
 import { AddShoppingCart } from "@material-ui/icons";
 import { Badge} from "@material-ui/core";
 import {userContext} from '../Context';
-import { useHistory } from 'react-router-dom';
+import { useHistory,Link } from 'react-router-dom';
 import Api from '../helpers/Api';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 
 function Navbar() {
-  const {user,logout}=useContext(userContext);
+  const {user,itemInBasket,getItem,logout}=useContext(userContext);
   let history=useHistory();
   const handleLogout=()=>{
     Api().post('/logout').then(res=>{
@@ -34,7 +35,7 @@ function Navbar() {
       ) 
   }
   const handleCart=(e)=>{
-    e.preventDefault()
+   e.preventDefault()
     history.push("/cart")
   }
   const handleAdmin=(e)=>{
@@ -43,6 +44,7 @@ function Navbar() {
   }
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
+  // const [itemInBasket, setitemInBasket] = useState();
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -51,26 +53,34 @@ function Navbar() {
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleMenuin = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const handleLogin=()=>{
+    history.push("/login")
+  }
+  const handleRegister=()=>{
+    history.push("/signup")
+  }
+  const handleHome=()=>{
+    history.push("/")
+  }
+  const handleProfile=()=>{
+    history.push("/profile")
+  }
+  useEffect(() => {
+   getItem()
+   
+  }, [itemInBasket]);
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
-      <AppBar position="static">
+     
+      <AppBar position="static" >
         <Toolbar>
           <IconButton
             size="large"
@@ -78,18 +88,22 @@ function Navbar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            
           >
             <MenuIcon />
+          
           </IconButton>
-          <Button color="inherit">Home</Button>
-          {user&&user.role=="admin"&&<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography sx={{ flexGrow: 1 }}><Button color="inherit" onClick={handleHome}>Home</Button></Typography>
+          <Typography sx={{ flexGrow: 1 }}><Button color="inherit" onClick={handleProfile}>All Products</Button></Typography>
+          {user&&user.role=="admin"&&<Typography variant="h6" component="div" >
           <Button color="inherit" onClick={handleAdmin}>ADMIN</Button>
           </Typography>}
           {user && (
             <div>
               <IconButton>
-              <Badge badgeContent={null} color="error">
-                <AddShoppingCart  onClick={handleCart} />
+              <Badge badgeContent={itemInBasket
+              } color="error">
+                <ShoppingCartIcon  onClick={handleCart} />
                </Badge>
               </IconButton>
               <IconButton
@@ -125,8 +139,8 @@ function Navbar() {
           )}
           {!user&&(
             <div>
-               <Button color="inherit">Login</Button>
-               <Button color="inherit">Signup</Button>
+               <Button color="inherit" onClick={handleLogin}>Login</Button>
+               <Button color="inherit" onClick={handleRegister}>Signup</Button>
             </div>
 
           )

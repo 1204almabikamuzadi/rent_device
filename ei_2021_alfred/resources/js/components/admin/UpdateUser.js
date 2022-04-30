@@ -74,7 +74,6 @@ function UpdateUser() {
                 </form>
 
             </div>
-            {JSON.stringify(member)}
         </div>
     )
 }

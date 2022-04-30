@@ -29,6 +29,7 @@ function UserProfile(props) {
     const [totalPage, settotalPage] = useState()
     const [totalItemPerPage, settotalItemPerPage] = useState()
     const [totalItems, settotalItems] = useState()
+    const [key, setkey] = useState("")
 
     let history = useHistory();
     const handleCreate = (e) => {
@@ -46,8 +47,6 @@ function UserProfile(props) {
             settotalItems(res.data.total)
             settotalPage(res.data.last_page)
             settotalItemPerPage(res.data.per_page)
-
-
             setloading(false)
         }).catch(error => {
             console.log(error.data)
@@ -63,21 +62,41 @@ function UserProfile(props) {
     }
     const handleAdd = (e) => {
         e.preventDefault()
-
-
     }
     const mystyle = {
         width: "100%",
         height: "100%",
 
     };
+    const handleSearch=(e)=>{
+        e.preventDefault()
+    
+
+        Api().get('/device/search/'+key).then(res=>{
+            setDevices(res.data.data) 
+            settotalItems(res.data.total)
+            settotalPage(res.data.last_page)
+            settotalItemPerPage(res.data.per_page)
+            
+
+        }
+        )
+        .catch(
+
+        )
+    }
+    const handleChange=(e)=>{
+        e.preventDefault()
+        setkey(e.target.value)
+    
+    }
     const listItems = devices.map(item =>
         <div className="item" key={item.id}>
             <div className="card" style={{ mystyle }}>
                 <img className="card-img-top" src={"http://127.0.0.1:8000/" + item.image_path} onError={handleDefault} alt="Card image cap" />
                 <div className="card-body">
                     <h5 className="card-title">{item.description.substr(0, 25) + "..."}</h5>
-                    <p className="card-text">{item.price} Euro </p>
+                    <p className="card-text">{item.price} Euro/mois</p>
                     <Link to={"/device/" + item.id}>add to cart</Link>
                     <button className="btn  btn-primary" value={item.id} onClick={handleDetails}> show details</button>
                 </div>
@@ -112,17 +131,17 @@ function UserProfile(props) {
 
             <ProfileContainer>
                 <div className="main-content container-fluid">
-                    <div className="card" >
-                        <div className="card-body">
-                            <h5 className="card-title">Welcome</h5>
-                            <p onClick={handleDevice} className="card-text">{user ? user.name : "you don't exist"}</p>
-                            <h2>{isAuth ? "true" : "not connected"}</h2>
-                        </div>
+                   
 
+                    <nav className="navbar navbar-light bg-light">
+                    <div className="container-fluid">
+                        <a className="navbar-brand" href='#'>Product List</a>
+                        <form className="d-flex">
+                        <input className="form-control me-2" type="search" onChange={handleChange} placeholder="Search" aria-label="Search" name="search"></input>
+                        <button className="btn btn-outline-primary" onClick={handleSearch} type="submit">Search</button>
+                        </form>
                     </div>
-
-                    <h2 className='text-center'>Product List</h2>
-                    <Navbar/>
+                    </nav>
                     <div className="items">{listItems}</div>
                     {user&&user.role=="admin"&&<button className="btn btn-lg btn-primary" onClick={handleCreate}> Create new Device</button>}
 
@@ -156,7 +175,7 @@ const ProfileContainer = styled.div`
     justify-content: space-around;
     flex-wrap: wrap;
     display: flex;
-    background-color: orange;
+    background:var(--mainGrey);
     border-radius: 5px;
     
     }

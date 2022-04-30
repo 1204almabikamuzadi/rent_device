@@ -15,25 +15,20 @@ class BasketController extends Controller
      */
     public function index()
     {
-        if(auth("sanctum")->check()){
-            $user_id=auth("sanctum")->user()->id;
-            $carts=Basket::where("user_id",$user_id)->get();
+        if (auth("sanctum")->check()) {
+            $user_id = auth("sanctum")->user()->id;
+            $carts = Basket::where("user_id", $user_id)->get();
             return response()->json([
-                "status"=>200,
-                "basket"=>$carts
-              ]);
+                "status" => 200,
+                "basket" => $carts
+            ]);
+        } else {
 
-        }
-        else{
-            
             return response()->json([
-                "status"=>409,
-                "message"=>"connectez-vous pour acceder au panier "
-              ]);
+                "status" => 409,
+                "message" => "connectez-vous pour acceder au panier "
+            ]);
         }
-
-        
-        
     }
 
     /**
@@ -46,62 +41,49 @@ class BasketController extends Controller
     {
         $request->validate(
             [
-                "device_id"=>"required|integer",
-                 "quantity"=>"required|integer|min:1"
+                "device_id" => "required|integer",
+                "quantity" => "required|integer|min:1"
             ]
         );
-        if(auth("sanctum")->check()){
-            $user_id=auth("sanctum")->user()->id;
-            $device_id=$request->device_id;
-            $quantity=$request->quantity;
-           
-            $device_check=Device::where("id",$device_id)->first();
-            if($device_check){
-                if(Basket::where("device_id",$device_id)->where("user_id",$user_id)->exists()){
-                    $basketitem=Basket::where("device_id",$device_id)->where("user_id",$user_id)->first();
-                    $qty=$basketitem->quantity;
-                    $basketitem->quantity=$qty+$quantity;
+        if (auth("sanctum")->check()) {
+            $user_id = auth("sanctum")->user()->id;
+            $device_id = $request->device_id;
+            $quantity = $request->quantity;
+
+            $device_check = Device::where("id", $device_id)->first();
+            if ($device_check) {
+                if (Basket::where("device_id", $device_id)->where("user_id", $user_id)->exists()) {
+                    $basketitem = Basket::where("device_id", $device_id)->where("user_id", $user_id)->first();
+                    $qty = $basketitem->quantity;
+                    $basketitem->quantity = $qty + $quantity;
                     $basketitem->save();
                     return response()->json([
-                        "status"=>200,
-                        "message"=>"Already added to cart"
-                      ]);
-
-                }else{
-                    $basket=new Basket;
-                    $basket->user_id=$user_id;
-                    $basket->device_id=$device_id;
-                    $basket->quantity=$quantity;
+                        "status" => 200,
+                        "message" => "Already added to cart"
+                    ]);
+                } else {
+                    $basket = new Basket;
+                    $basket->user_id = $user_id;
+                    $basket->device_id = $device_id;
+                    $basket->quantity = $quantity;
                     $basket->save();
 
                     return response()->json([
-                        "status"=>201,
-                        "message"=>"cart created successfully"
-                      ]);
-    
-
+                        "status" => 201,
+                        "message" => "cart created successfully"
+                    ]);
                 }
-
-
-               
-            }
-
-            else{
+            } else {
                 return response()->json([
-                    "status"=>404,
-                    "message"=>"device does not exist"
-                  ]);
-
+                    "status" => 404,
+                    "message" => "device does not exist"
+                ]);
             }
-
-           
-        }
-        else{
+        } else {
             return response()->json([
-                "status"=>409,
-                "message"=>"login to add to cart"
-              ]);
-        
+                "status" => 409,
+                "message" => "login to add to cart"
+            ]);
         }
     }
 
@@ -136,29 +118,22 @@ class BasketController extends Controller
      */
     public function destroy(Basket $basket)
     {
-        
-        if(auth("sanctum")->check()){
-            $user_id=auth("sanctum")->user()->id;
-            if($user_id===$basket->user_id){
+
+        if (auth("sanctum")->check()) {
+            $user_id = auth("sanctum")->user()->id;
+            if ($user_id === $basket->user_id) {
                 $basket->delete();
             }
-            
-            return response()->json([
-                "status"=>200,
-                "message"=>"The basket removed succesfully"
-              ]);
 
-        }
-        else{
             return response()->json([
-                "status"=>409,
-                "message"=>"login to add to cart"
-              ]);
-
+                "status" => 200,
+                "message" => "The basket removed succesfully"
+            ]);
+        } else {
+            return response()->json([
+                "status" => 409,
+                "message" => "login to add to cart"
+            ]);
         }
-    
-        
     }
-    
-    
 }

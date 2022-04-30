@@ -21,8 +21,9 @@ class ReservationSeeder extends Seeder
             DB::table('reservations')->insert([
             'startDate'=>$faker->date(),
             'endDate'=>$faker->date(),
-            'userId' => $faker->randomElement($usersIDs),
-            'device_id' => $faker->randomElement($devicesIDs)
+            'user_id' => $faker->randomElement($usersIDs),
+            'device_id' => $faker->randomElement($devicesIDs),
+            'invoice_id' => $faker->randomElement($devicesIDs)
             ]);
         }
     }

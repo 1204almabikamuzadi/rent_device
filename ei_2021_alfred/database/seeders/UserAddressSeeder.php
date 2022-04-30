@@ -13,6 +13,11 @@ class UserAddressSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
+        \App\Models\User::factory(10)->create()->each(function($user){
+            $address=\App\Models\UserAddress::factory()->make();
+            $user->address()->save($address);
+        });
+       
     }
 }

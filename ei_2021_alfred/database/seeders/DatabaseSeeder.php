@@ -14,15 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create()->each(function($user){
-            $address=\App\Models\UserAddress::factory()->make();
-            $user->address()->save($address);
-        });
-        \App\Models\Category::factory(10)->create()->each(function($cat){
-            $devices=\App\Models\Device::factory(5)->make();
-            $cat->devices()->saveMany($devices);
-        });
-
+       
+        $this->call([
+            RoleSeeder::class,
+            CategorySeeder::class,
+            UserAddressSeeder::class,
+            DeviceSeeder::class,
+            ReservationSeeder::class,
+            InvoiceSeeder::class,
+            
+           
+        ]);
 
 
 
