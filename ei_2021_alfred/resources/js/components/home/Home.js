@@ -8,8 +8,7 @@ import Body from './Body';
 function Home(props) {
     return (
         <div>
-            <Body/>
-            
+            <Body/>    
             
         </div>
     );

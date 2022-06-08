@@ -54,7 +54,7 @@ function UserProfile(props) {
     }, []);
     const handleDefault = (e) => {
         e.target.src = "http://127.0.0.1:8000/avatar/default.jpg"
-        console.log("error")
+    
     }
     const displayReservations = (e) => {
         e.preventDefault()
