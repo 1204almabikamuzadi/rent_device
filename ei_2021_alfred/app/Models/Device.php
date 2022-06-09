@@ -20,9 +20,9 @@ class Device extends Model
 
 
     ];
-    protected $with=['category'];
-    public function category(){
-        return $this->belongsTo(Category::class);
+    protected $with=['modele'];
+    public function modele(){
+        return $this->belongsTo(Modele::class);
     }
     public function reservations(){
         return $this->hasMany(Reservation::class);

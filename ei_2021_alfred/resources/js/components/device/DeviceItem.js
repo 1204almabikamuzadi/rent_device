@@ -87,7 +87,7 @@ function DeviceItem(props) {
              <div className="card ">
         <img className="card-img-top" src={"http://127.0.0.1:8000/"+device.image_path } onError={handleDefault} alt="Card image cap"/>
         <div className="card-body">
-          <h5 className="card-title">{device.description}</h5>
+          <h5 className="card-title">{device.name}</h5>
           <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
           <p className="card-text">{device.price}<small className="text-muted">Last updated 3 mins ago</small></p>
          

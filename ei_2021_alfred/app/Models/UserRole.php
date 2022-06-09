@@ -13,6 +13,7 @@ class UserRole extends Model
      *
      * @var array
      */
+    public $timestamps = false;
     protected $fillable = [
         'role_id',
         'user_id'

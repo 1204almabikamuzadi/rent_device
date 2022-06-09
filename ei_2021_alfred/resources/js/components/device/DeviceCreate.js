@@ -24,21 +24,21 @@ function DeviceCreate(props) {
         setSelectedFile(e.target.files[0])
        
     }
-    const [category,setCategory]=useState()
+    const [modele,setModele]=useState()
     const handleSelect=(e)=>{
-        setCategory(e.target.value)
+        setModele(e.target.value)
         //console.log(category)
     }
     useEffect(()=>{
-        const cats=[]
-        Api().get("category").then(res=>{
+        const mods=[]
+        Api().get("modele").then(res=>{
             (res.data).map(cat=>{
-             cats.push(cat)
+             mods.push(cat)
             })
-            setOptions(cats)
+            setOptions(mods)
             
         }).catch(error=>{
-            console.log("category not found")
+            console.log("modeles not found")
         })
     },[]);
 
@@ -74,7 +74,7 @@ function DeviceCreate(props) {
                 
                 <form>
                 <div className="form-group">
-                    <label htmlFor="name"> Price</label>
+                    <label htmlFor="name"> Color</label>
                     <input  className="form-control"type="text" id="name" name="name" onChange={handleChange} autoComplete="name" value={props.props}/>
                         
                     </div>
@@ -83,10 +83,15 @@ function DeviceCreate(props) {
                         <textarea  className="form-control" name="description" id="description" cols="30" rows="5" onChange={handleChange} autoComplete="model" value={props.model} ></textarea>
                            
                     </div> 
+                    <div className="form-group" onSubmit={handleSubmit}>
+                        <label htmlFor="descriptin"> Specifications</label>
+                        <textarea  className="form-control" name="description" id="description" cols="30" rows="5" onChange={handleChange} autoComplete="model" value={props.model} ></textarea>
+                           
+                    </div> 
 
                     <div className="form-group">
-                    <label htmlFor="Category "> Category</label>
-                    <select id='category' className="select form-control" value={category} onChange={handleSelect}>
+                    <label htmlFor="modele "> Modele</label>
+                    <select id='modele' className="select form-control" value={modele} onChange={handleSelect}>
                                     {options.map((option,i)=>{
                                         return(<option  key={i}value={option.id}>{option.name}</option>)
                                         

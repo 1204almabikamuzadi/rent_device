@@ -13,6 +13,7 @@ class Role extends Model
      *
      * @var array
      */
+    public $timestamps = false;
     protected $fillable=['name'];
     public function createRole($name){
         return $this->name=$name;

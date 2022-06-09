@@ -21,7 +21,8 @@ import UpdateUser from '../components/admin/UpdateUser';
 import AdminPannel from '../components/admin/AdminPannel';
 import ViewDevice from '../components/device/ViewDevice';
 import Signin from '../components/login/Signin';
-
+import ModeleCreate from '../components/admin/Modelecreate'
+import CategoryCreate from'../components/admin/CategoryCreate'
 
 function Router(props) {
     
@@ -39,6 +40,8 @@ function Router(props) {
                         <NavRoute path="/login" component={LoginPage} />
                         <NavRoute path="/signup" component={Signup} />
                         <NavRoute path="/create" component={DeviceCreate} />
+                        <NavRoute path="/createModele" component={ModeleCreate} />
+                        <NavRoute path="/createCategory" component={CategoryCreate} />
                         <NavRoute path="/device/:id" component={ViewDevice} />
                         <NavRoute path="/cart" component={CartItem} />
                         <NavRoute path="/replaceDevice" component={ReportedReservations} />

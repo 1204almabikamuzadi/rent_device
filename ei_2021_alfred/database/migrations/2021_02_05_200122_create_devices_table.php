@@ -15,13 +15,12 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->string('color');
             $table->string('image_path')->default("avatar/default.jpg");
             $table->integer('price');
             $table->boolean('isRentable')->default(true);
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->bigInteger('modele_id')->unsigned();
+            $table->foreign('modele_id')->references('id')->on('modeles');
             $table->timestamps();
         });
     }

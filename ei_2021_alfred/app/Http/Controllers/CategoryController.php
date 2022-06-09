@@ -25,7 +25,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            
+        ]);
+        $category=new Category();
+        $category->name=$request->input("name");
+        if($category->save()){
+            return response()->json([
+                "success"=>"categorysuccesfully created"
+             ]);
+        }
+        else{
+            return response()->json([
+                "fail"=>"can not create category"
+             ]);
+        }
     }
 
     /**

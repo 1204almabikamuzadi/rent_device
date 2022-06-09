@@ -25,6 +25,7 @@ Route::post('/logout','LoginController@logout')->middleware("auth:sanctum");
 Route::apiResource("device","DeviceController");
 Route::apiResource("category","CategoryController");
 Route::apiResource("basket","BasketController");
+Route::apiResource("modele","ModeleController");
 Route::put("/reservation/{id}","ReservationController@reportBreakdown");
 Route::get("/replaceDevice/{id}","ReservationController@replaceDevice");
 Route::get("/payconfirm","UserController@confirm");

@@ -95,7 +95,7 @@ function UserProfile(props) {
             <div className="card" style={{ mystyle }}>
                 <img className="card-img-top" src={"http://127.0.0.1:8000/" + item.image_path} onError={handleDefault} alt="Card image cap" />
                 <div className="card-body">
-                    <h5 className="card-title">{item.description.substr(0, 25) + "..."}</h5>
+                    <h5 className="card-title">{item.modele.name}</h5>
                     <p className="card-text">{item.price} Euro/mois</p>
                     <Link to={"/device/" + item.id}>add to cart</Link>
                     <button className="btn  btn-primary" value={item.id} onClick={handleDetails}> show details</button>
@@ -144,7 +144,8 @@ function UserProfile(props) {
                     </nav>
                     <div className="items">{listItems}</div>
                     {user&&user.role=="admin"&&<button className="btn btn-lg btn-primary" onClick={handleCreate}> Create new Device</button>}
-
+                     {user&&user.role=="admin"&&<Link  to='/createModele'className="btn btn-lg btn-primary" >  new Modele</Link>}
+                     {user&&user.role=="admin"&&<Link to='createCategory' className="btn btn-lg btn-primary" >  new Category</Link>}
                     <div>
                   
                    <Pagination
