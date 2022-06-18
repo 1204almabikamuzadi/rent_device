@@ -20,6 +20,7 @@ class Device extends Model
 
 
     ];
+    protected $appends=array('in_stock');
     protected $with=['modele'];
     public function modele(){
         return $this->belongsTo(Modele::class);
@@ -27,6 +28,12 @@ class Device extends Model
     public function reservations(){
         return $this->hasMany(Reservation::class);
     }
+    public function getInStockAttribute(){
+     
+        $stock=Device::where("modele_id",$this->modele_id)->get();
+        return  !empty($stock);
+
+       }
     
 
 }

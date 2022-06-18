@@ -18,8 +18,6 @@ class InvoiceSeeder extends Seeder
         $faker = \Faker\Factory::create();
         foreach ($reservationsIDs as $index) {
             DB::table('invoices')->insert([
-           
-            
             "amount"=>$faker->numberBetween($min = 150, $max = 600),
             "number"=>$faker->randomNumber(7)
             ]);

@@ -25,6 +25,9 @@ class CreateUsersTable extends Migration
             $table->boolean('active')->default(true);
             $table->integer('age')->nullable();
             $table->string('role')->default('member');
+            $table->bigInteger('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('roles')
+            ->onDelete('cascade');
         });
     }
 

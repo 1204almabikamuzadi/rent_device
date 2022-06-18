@@ -16,15 +16,14 @@ class DeviceSeeder extends Seeder
     public function run()
     {
 
-        $categoryIds=DB::table('categories')->pluck('id');
+        $modeles=DB::table('modeles')->pluck('id');
         $faker = \Faker\Factory::create();
         foreach (range(1,50) as $index) {
             DB::table('devices')->insert([
-                'name'=>$faker->slug(2),
-                'description'=>$faker->sentence(6),
+                'color'=>$faker->colorName(),
                 'isRentable'=>$faker->boolean(true),
                 "price"=>$faker->numberBetween($min = 150, $max = 600),
-                'category_id' => $faker->randomElement($categoryIds)
+                'modele_id' => $faker->randomElement($modeles)
             ]);
         }
 

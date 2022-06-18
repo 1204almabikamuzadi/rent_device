@@ -52,4 +52,7 @@ class User extends Authenticatable
     public function isAdmin(){
         $this->role->name="admin";
     }
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
 }

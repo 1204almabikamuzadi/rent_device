@@ -101,9 +101,9 @@ function ViewDevice(props) {
                            <div className="col-md-8">
                                <h4>
                                {device.description}
-                                   <span className="float-end btn-sm btn-danger badge badge-pil">{device.category.name}</span>
+                                   <span className="float-end btn-sm btn-danger badge badge-pil">{device.modele.name}</span>
                                </h4>
-                               <p>{device.description}</p>
+                               <p>{device.modele.description}</p>
                                <h4 className="mb-1">
                                {device.price}
                                    <s className="ms-2">{device.price}</s>

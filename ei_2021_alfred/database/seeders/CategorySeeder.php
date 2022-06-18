@@ -14,12 +14,11 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories=['Windows_pc','Mac_pc','Phone_Android','Iphone'];
+        $categories=['Windows_pc','Mac_pc','Phone_Android','Iphone','printers','smart_tv'];
         $faker = \Faker\Factory::create();
         foreach ($categories as $cat) {
             DB::table('categories')->insert([
             'name'=>$cat,
-            'type'=>$faker->word(6)
 
             ]);
         }
