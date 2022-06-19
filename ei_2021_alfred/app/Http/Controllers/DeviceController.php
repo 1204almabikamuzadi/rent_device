@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\Modele;
 use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -96,8 +97,10 @@ class DeviceController extends Controller
         $device->delete();
     }
     public function search($key){
-        $devices= Device::where('name','LIKE',"%$key%")
-        ->orWhere('description','LIKE',"%$key%")->paginate(8);
+        $modeles=Modele::where('name','LIKE',"%$key%")
+        ->orWhere('description','LIKE',"%$key%") ->orWhere('specifications','LIKE',"%$key%")->pluck("id");
+
+        $devices= Device::whereIn("modele_id",$modeles)->paginate(8);
         return $devices->toJson();
          
         
